@@ -23,18 +23,28 @@ def create_board(board_rows, board_columns):
     """
     return [["_" for count in range(board_columns)] for rows in range(board_rows)]
 
-def print_board(board):
-    for row in board:
-        print(" ".join(row))
-    print("")
+#def print_board(board):
+    #for row in board:
+    #    print(" ".join(row))
+    #print("")
+
+def game_board(myboard):
+    print("    0    1    2")
+    for count, row in enumerate(myboard):
+        print(count, row)
+
 
 def test():
     myboard = create_board(board_rows, board_columns)
     # print_board(myboard)
     myboard[1][2] = str(6)
-    print_board(myboard)
+    game_board(myboard)
+    # print_board(myboard)
+    
 
 test()
+
+
 
 
 
