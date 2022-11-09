@@ -42,3 +42,42 @@ def create_column_index():
 
 create_column_index()    
 create_board()
+
+"""
+Another try at creating a functional board
+"""
+
+"""
+row = int(input("Enter rows here: "))
+column = int(input("enter columns here: "))
+
+#Hidden_Board = [["-"]*
+
+
+Hidden_Pattern= [[' ']*8 for x in range(8)]
+Guess_Pattern= [[' ']*8 for x in range(8)]
+
+#print(Hidden_Pattern)
+
+Hidden_Board = [[" "]*row for x in range(column+1)]
+Board = [[" "]*row for x in range(column+1)]
+
+
+letters_to_number = {"A":0,"B":1,"C":2,"D":3,"E":4,"F":5,"G":6,"H":7,"I":8,"J":9,"K":10}
+
+def print_board(Board):
+  letters=["A","B","C","D","E","F","G","H","I","J","K"]
+  column_letters=[]
+  i = 0
+  while i < column:
+    column_letters.append(letters[i])
+    i +=1
+  print(column_letters)
+  #print(Board)
+  row_num = 1
+  for row in Board:
+    print(row_num, "|-|".join(row))
+    row_num += 1
+    
+print_board(Board)
+"""
