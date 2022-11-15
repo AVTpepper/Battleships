@@ -18,6 +18,26 @@ board_size = int(input("enter board size: "))
 
 board = []
 
+for x in range(board_size):
+    board.append(["-"] * board_size)
+
+print(board)
+
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def print_board(board):
+    #for letter in alphabet:
+     # print(" "+ )
+    #print("  " + alphabet[0: len(board)] + "  ")
+    #print(" +-+-+-+-+-+")
+    row_number = 1
+    for row in board:
+        print("%d|%s|" % (row_number, "|".join(row)))
+       # print(" +-+-+-+-+-+")
+        row_number = row_number + 1
+
+print("Let's play Battleship!")
+print_board(board)
 
 
 
