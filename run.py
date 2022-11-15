@@ -42,7 +42,7 @@ def print_board(board):
         
 
 
-def making_guesses():
+def making_ships():
     ship_placement = []
     ships_placed = 0
     ships_sunk = 0
@@ -65,20 +65,21 @@ def making_guesses():
             ship_placement.append(ship_location)
             ships_placed += 1
     print(ship_placement)
-    
-    
-    for turn in range(9):
+    for turn in range(9):  
+
+    # I want this to be in a second function, 
+    # but Im stuck at how I can do that because of the variables 
+    # I am using I have tried passing them through return___ and having them in paranthesis behind the def function(__)
+
         print(f"Turn {turn}")
         guess_row = int(input("Guess Row: "))
         guess_col = int(input("Guess Col: "))
         guess = [guess_row, guess_col]
-
-
-        if guess in ship_placement:  # and guess_col == ship_col
+        if guess in ship_placement:
             print("Commander! You sunk a battleship!")
             board[guess_row - 1][guess_col - 1] = "O"
             ships_sunk += 1
-        elif (guess_row < board_size or guess_row > board_size):
+        elif (guess_row < 1 or guess_row > board_size):
             print("Commander, your coordinates are out of range!")
             print(f"Try shooting within rows 1-{board_size} and columns 1-{board_size}")
         elif (board[guess_row - 1][guess_col - 1]) == "X" or (board[guess_row - 1][guess_col - 1]) == "O":
@@ -97,10 +98,8 @@ def making_guesses():
         print_board(board)
 
 
+
 print("Let's play Battleship!")
 print_board(board)
-making_guesses()
-
-
-
+making_ships()
 
