@@ -13,8 +13,15 @@ print("After every input you type into the game, press enter to continue.")
 #add print message specifying that the board needs to be 10 or less.
 
 #enter board size instead of rows and columns. 3 = 3x3, 4 = 4x4
-row = int(input("enter number of rows: ")) #check what is entered, with a message, higher that max, enter something less than or 10
+board_size = int(input("enter board size: ")) 
+#check what is entered, with a message, higher that max, enter something less than or 10
 
+board = []
+
+
+
+
+"""
 column = int(input("enter number of columns: "))
 
 rows = []
@@ -82,8 +89,6 @@ update_board(rows)
 # create_board()
 
 
-
-"""
 Another try at creating a functional board
 """
 
