@@ -48,17 +48,43 @@ def print_board(board):
         row_number += 1    
         #for letter in alphabet:
 
-ship_placement = []
+# ship_placement = []
 
-def placing_ships(ship_placement):
+#def placing_ships(ship_placement):
+ #   ship_placement = []
+  #  ships_placed = 0
+   # if board_size < 6:
+    #    total_ships = 1
+     #   print(f"There is {total_ships} ship in range commander, go shoot them down!")
+      #  while ships_placed != total_ships:
+       #     ship_row = randint(0, (board_size))
+        #    ship_col = randint(0, (board_size))
+         #   ship_location = [ship_row, ship_col]
+          #  ship_placement.append(ship_location)
+           # ships_placed += 1
+    #elif board_size <= 10:
+     #   total_ships = 3
+      #  print(f"There are {total_ships} ships in range commander, go shoot them down!")
+       # while ships_placed != total_ships:
+        #    ship_row = randint(0, (board_size))
+         #   ship_col = randint(0, (board_size))
+          #  ship_location = [ship_row, ship_col]
+           # ship_placement.append(ship_location)
+            #ships_placed += 1
+    #print(ship_placement)
+    # return ship_placement
+
+
+def making_guesses():
     ship_placement = []
     ships_placed = 0
+    ships_sunk = 0
     if board_size < 6:
         total_ships = 1
         print(f"There is {total_ships} ship in range commander, go shoot them down!")
         while ships_placed != total_ships:
-            ship_row = randint(0, (board_size))
-            ship_col = randint(0, (board_size))
+            ship_row = randint(1, (board_size))
+            ship_col = randint(1, (board_size))
             ship_location = [ship_row, ship_col]
             ship_placement.append(ship_location)
             ships_placed += 1
@@ -66,43 +92,54 @@ def placing_ships(ship_placement):
         total_ships = 3
         print(f"There are {total_ships} ships in range commander, go shoot them down!")
         while ships_placed != total_ships:
-            ship_row = randint(0, (board_size))
-            ship_col = randint(0, (board_size))
+            ship_row = randint(1, (board_size))
+            ship_col = randint(1, (board_size))
             ship_location = [ship_row, ship_col]
             ship_placement.append(ship_location)
             ships_placed += 1
     print(ship_placement)
-    return ship_placement
-
-
-def making_guesses(ship_placement):
+    
+    
     for turn in range(9):
-        print ("Turn"), (turn +1)
-        guess_row = (int(input("Guess Row: ")) - 1)
-        guess_col = (int(input("Guess Col: ")) - 1)
+        print(f"Turn {turn}")
+        guess_row = int(input("Guess Row: "))
+        guess_col = int(input("Guess Col: "))
         guess = [guess_row, guess_col]
 
-        if guess == ship_placement: # and guess_col == ship_col
-            print("Congratulations! You sunk my battleship!")
-            break
+
+        if guess in ship_placement:  # and guess_col == ship_col
+            print("Commander! You sunk a battleship!")
+            board[guess_row - 1][guess_col - 1] = "O"
+            ships_sunk += 1
+        elif (guess_row < board_size or guess_row > board_size):
+            print("Commander, your coordinates are out of range!")
+            print(f"Try shooting within rows 1-{board_size} and columns 1-{board_size}")
+        elif (board[guess_row - 1][guess_col - 1]) == "X" or (board[guess_row - 1][guess_col - 1]) == "O":
+            print("Commander...You guessed that one already...")
         else:
-            if (guess_row < 0 or guess_row > board_size):
-                print("Oops, that's not even in the ocean.")
-            elif(board[guess_row][guess_col] == "X"):
-                print("You guessed that one already.")
-            else:
-                print("You missed my battleship!")
-                board[guess_row][guess_col] = "X"
+            print("Commander, you missed the battleship, let's try again!")
+            board[guess_row - 1][guess_col - 1] = "X"
         if turn == 8:
             print("Game Over")
-        turn =+ 1
+        if ships_sunk == total_ships:
+            print_board(board)
+            print("Congratulations Commander, you have sunk all the ships!")
+            print("Victory is ours, set sails, and let's go home!")
+            break
+        
+            
+        turn += 1
         print_board(board)
+#        if ships_sunk == total_ships:
+#            print_board(board)
+#            print("Congratulations, you have sunk all the ships!")
+#            break
 
 
 print("Let's play Battleship!")
 print_board(board)
-placing_ships(ship_placement)
-making_guesses(ship_placement)
+#placing_ships(ship_placement)
+making_guesses()
 
 
 
