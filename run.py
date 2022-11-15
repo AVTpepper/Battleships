@@ -12,7 +12,7 @@ print("This time, you get to decide the size of the battlefield.")
 print("After every input you type into the game, press enter to continue.")
 
 
-board_size = int(input("enter board size: ")) 
+board_size = int(input("enter board size:\n")) 
 
 
 board = []
@@ -38,8 +38,7 @@ def print_board(board):
             print(" %d|%s|" % (row_number, "|".join(row)))
         else:
             print("%d|%s|" % (row_number, "|".join(row)))
-        row_number += 1    
-        
+        row_number += 1
 
 
 def making_ships():
@@ -66,14 +65,14 @@ def making_ships():
             ships_placed += 1
     print(ship_placement)
     
-    
+
     for turn in range(9):  
     # I want this to be in a second function, 
     # but Im stuck at how I can do that because of the variables 
     # I am using I have tried passing them through return___ and having them in paranthesis behind the def function(__)
         print(f"Turn {turn}")
-        guess_row = int(input("Guess Row: "))
-        guess_col = int(input("Guess Col: "))
+        guess_row = int(input("Guess Row:\n"))
+        guess_col = int(input("Guess Col:\n"))
         guess = [guess_row, guess_col]
         if guess in ship_placement:
             print("Commander! You sunk a battleship!")
