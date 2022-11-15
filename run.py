@@ -26,15 +26,39 @@ print(board)
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def print_board(board):
-    #for letter in alphabet:
-     # print(" "+ )
-    #print("  " + alphabet[0: len(board)] + "  ")
-    #print(" +-+-+-+-+-+")
+    column = 0
+    #for column in board:
+        # index = "  " + alphabet[range(len(board))]
+    #column += 1
+    #print(index)
+    letters = alphabet[0: (board_size)]
+    print(letters)
+    #for i in letters:
+    print(" %s%s" % (" "," ".join(letters)))
+
+
+    #range(len(board))
     row_number = 1
     for row in board:
         print("%d|%s|" % (row_number, "|".join(row)))
        # print(" +-+-+-+-+-+")
-        row_number = row_number + 1
+        row_number += 1    
+        #for letter in alphabet:
+
+"""
+i = 1
+    while i < (column + 1):
+        col_number = "   " + str(i)
+        columns.append(col_number)
+        i += 1
+        indexes = " ".join(str(index) for index in columns)
+    print(indexes)
+"""
+
+     # print(" "+ )
+    #print("  " + alphabet[0: len(board)] + "  ")
+    #print(" +-+-+-+-+-+")
+    
 
 print("Let's play Battleship!")
 print_board(board)
