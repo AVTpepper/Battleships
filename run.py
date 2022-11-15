@@ -26,7 +26,7 @@ print(board)
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 def print_board(board):
-    column = 0
+    column = 1
     #for column in board:
         # index = "  " + alphabet[range(len(board))]
     #column += 1
@@ -48,8 +48,9 @@ def print_board(board):
         row_number += 1    
         #for letter in alphabet:
 
+ship_placement = []
 
-def placing_ships():
+def placing_ships(ship_placement):
     ship_placement = []
     ships_placed = 0
     if board_size < 6:
@@ -71,12 +72,38 @@ def placing_ships():
             ship_placement.append(ship_location)
             ships_placed += 1
     print(ship_placement)
+    return ship_placement
 
+
+def making_guesses(ship_placement):
+    for turn in range(9):
+        print ("Turn"), (turn +1)
+        guess_row = (int(input("Guess Row: ")) - 1)
+        guess_col = (int(input("Guess Col: ")) - 1)
+        guess = [guess_row, guess_col]
+
+        if guess == ship_placement: # and guess_col == ship_col
+            print("Congratulations! You sunk my battleship!")
+            break
+        else:
+            if (guess_row < 0 or guess_row > board_size):
+                print("Oops, that's not even in the ocean.")
+            elif(board[guess_row][guess_col] == "X"):
+                print("You guessed that one already.")
+            else:
+                print("You missed my battleship!")
+                board[guess_row][guess_col] = "X"
+        if turn == 8:
+            print("Game Over")
+        turn =+ 1
+        print_board(board)
 
 
 print("Let's play Battleship!")
 print_board(board)
-placing_ships()
+placing_ships(ship_placement)
+making_guesses(ship_placement)
+
 
 
 
