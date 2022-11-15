@@ -1,7 +1,7 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
-
+from random import randint
 
 print("Welcome to the game of Battleships!")
 
@@ -45,23 +45,21 @@ def print_board(board):
         row_number += 1    
         #for letter in alphabet:
 
-"""
-i = 1
-    while i < (column + 1):
-        col_number = "   " + str(i)
-        columns.append(col_number)
-        i += 1
-        indexes = " ".join(str(index) for index in columns)
-    print(indexes)
-"""
 
-     # print(" "+ )
-    #print("  " + alphabet[0: len(board)] + "  ")
-    #print(" +-+-+-+-+-+")
-    
+
 
 print("Let's play Battleship!")
 print_board(board)
+
+def random_row(board):
+    return randint(0, len(board))
+def random_col(board):
+    return randint(0, len(board))
+
+ship_row = random_row(board)
+ship_col = random_col(board)
+print(ship_row)
+print(ship_col)
 
 
 
