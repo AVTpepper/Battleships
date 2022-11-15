@@ -65,12 +65,12 @@ def making_ships():
             ship_placement.append(ship_location)
             ships_placed += 1
     print(ship_placement)
+    
+    
     for turn in range(9):  
-
     # I want this to be in a second function, 
     # but Im stuck at how I can do that because of the variables 
     # I am using I have tried passing them through return___ and having them in paranthesis behind the def function(__)
-
         print(f"Turn {turn}")
         guess_row = int(input("Guess Row: "))
         guess_col = int(input("Guess Col: "))
