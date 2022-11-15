@@ -34,32 +34,63 @@ def print_board(board):
     letters = alphabet[0: (board_size)]
     print(letters)
     #for i in letters:
-    print(" %s%s" % (" "," ".join(letters)))
+    print("  %s%s" % (" "," ".join(letters)))
 
 
     #range(len(board))
     row_number = 1
     for row in board:
-        print("%d|%s|" % (row_number, "|".join(row)))
+        if row_number <= 9:
+            print(" %d|%s|" % (row_number, "|".join(row)))
+        else:
+            print("%d|%s|" % (row_number, "|".join(row)))
        # print(" +-+-+-+-+-+")
         row_number += 1    
         #for letter in alphabet:
 
 
+def placing_ships():
+    ship_placement = []
+    ships_placed = 0
+    if board_size < 6:
+        total_ships = 1
+        print(f"There is {total_ships} ship in range commander, go shoot them down!")
+        while ships_placed != total_ships:
+            ship_row = randint(0, (board_size))
+            ship_col = randint(0, (board_size))
+            ship_location = [ship_row, ship_col]
+            ship_placement.append(ship_location)
+            ships_placed += 1
+    elif board_size <= 10:
+        total_ships = 3
+        print(f"There are {total_ships} ships in range commander, go shoot them down!")
+        while ships_placed != total_ships:
+            ship_row = randint(0, (board_size))
+            ship_col = randint(0, (board_size))
+            ship_location = [ship_row, ship_col]
+            ship_placement.append(ship_location)
+            ships_placed += 1
+    print(ship_placement)
+
 
 
 print("Let's play Battleship!")
 print_board(board)
+placing_ships()
 
+
+
+"""
 def random_row(board):
     return randint(0, len(board))
 def random_col(board):
-    return randint(0, len(board))
+    if board_size == 10:
+        return randint(0, len(board))
 
 ship_row = random_row(board)
 ship_col = random_col(board)
-print(ship_row)
-print(ship_col)
+print(ship_row, ship_col)
+"""
 
 
 
