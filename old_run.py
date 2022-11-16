@@ -24,6 +24,11 @@ def get_board_size():
     global board_size
     global board
 
+    if board_size > 1 and board_size <= 10:
+        print("perfect")
+    if board_size < 1 or board_size > 10:
+        raise Exception("Sorry, no numbers below 1 or higher than 10")
+
     for x in range(board_size):
         board.append(["-"] * board_size)
     return board_size
@@ -59,7 +64,7 @@ def making_ships():
     if board_size <= 2:
         shots = 2
         total_ships = 1
-        print(f"There is {total_ships} ship in range commander, go shoot them down!")
+        print(f"There is {total_ships} ship in range commander, go shoot it down!")
         while ships_placed != total_ships:
             ship_row = randint(1, (board_size))
             ship_col = randint(1, (board_size))
@@ -67,9 +72,9 @@ def making_ships():
             ship_placement.append(ship_location)
             ships_placed += 1
     if board_size < 6:
-        total_ships = 1
-        shots = 8
-        print(f"There is {total_ships} ship in range commander, go shoot them down!")
+        total_ships = 3
+        shots = 10
+        print(f"There is {total_ships} ship in range commander, go shoot it down!")
         while ships_placed != total_ships:
             ship_row = randint(1, (board_size))
             ship_col = randint(1, (board_size))
@@ -92,6 +97,7 @@ def making_ships():
 def making_guesses():
     global ship_placement
     global ships_sunk
+    global board_size
     
     for turn in range((board_size*board_size) // 3):  
             # I want this to be in a second function, 
@@ -109,17 +115,31 @@ def making_guesses():
                 guess_row = int(guess_row)
                 break
             else:
-                print("please enter a number")
+                print("Commander, what you have entered is not in range...")
                 continue
 
         guess_col = None
         while True:
-            guess_col = input("Enter a column number: ")
-            if guess_col.isdigit():
-                guess_col = int(guess_col)
+            guess_col = input("Enter column letter: ")
+
+            if guess_col.isalpha() and len(guess_col) == 1:
+                guess_col = guess_col.lower()
+                guess_col = ord(guess_col) - 96
+                print(guess_col)
                 break
+
+                #if guess_col in range(1, board_size):
+                #    print("that works")
+                #    print(guess_col)
+                    #break
+                #guess_col = ord(guess_col) -96
+                #    print("that works")
+                #    print(guess_col)
+                #else:
+                #    print("Please enter a letter thats visible on the board")
+                #    continue
             else:
-                print("please enter a number")
+                print("Commander, the available letters are on the board!")
                 continue
 
         print(f"Shots {shots}")
@@ -131,10 +151,10 @@ def making_guesses():
         elif (turn + 1) - shots == 0:
             print("Game Over, lets go back to the docks and restock ammunition")
             #break
-        elif (guess_row < 1 or guess_row > board_size):
+        elif (guess_row < 1 or guess_row > board_size) or (guess_col < 1 or guess_col > board_size):
             print("Commander, your coordinates are out of range!")
             print("Stop wasting our shots!")
-            print(f"Try shooting within rows 1-{board_size} and columns 1-{board_size}")
+            print(f"Try shooting within rows 1-{board_size} and columns A-{alphabet[board_size - 1]}")
         elif (board[guess_row - 1][guess_col - 1]) == "X" or (board[guess_row - 1][guess_col - 1]) == "O":
             print("Commander...You guessed that one already...")
         else:
@@ -150,11 +170,13 @@ def making_guesses():
         print_board()
 
 introduction()
+
 board_size = int(input("enter board size: "))
-if board_size > 1 and board_size <= 10:
-    print("perfect")
-if board_size < 1 or board_size > 10:
-    raise Exception("Sorry, no numbers below 1 or higher than 10")
+
+
+
+
+
 board = []
 ship_placement = []
 total_ships = 10
