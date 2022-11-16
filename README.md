@@ -1,31 +1,9 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# __Portfolio Project 3 - Battleships__
+At the start of the project I was looking forward to not having to worry too much about the style and what the finished end product would look like. I didnt know I could be that wrong. I enjoyed spending quite a bit of time putting in finishing touches trying to make the game look better, but also give a better experience to the user. I am happy with the end product and I hope plenty of people can have fun playing it!
 
-Welcome AVTpepper,
+##__Planning Phase__##
+I always had a clear picture in my head of how I wanted to the game look like. I did create a flowchart on paint, which was lost into the unsaved files folder... AKA not to be found ever again. This is something I can learn from, making sure to make a proper plan, since as I move along with a project I should always be able to look back at what my idea was to get myself back on track. A flowchart will also help with keeping the logic simple without overcomplicating steps throughout the creation.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+---
 
-## Reminders
-
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+##__Features__##
