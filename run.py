@@ -1,50 +1,66 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+"""
+This file includes the battleship code.
+Information for the player:
+- Can has a maximum size of 10 rows and 10 columns.
+- The board will always have the same amount of rows and columns.
+- The size you chose will multiply by itself.
+    - Example: a board size 3 would be 3 rows and 3 columns.
+- Columns are represented by letters.
+- Rows are represented by numbers.
+- You will always guess row first, then followed by columns.
+- The ships will be hidden on the board.
+- If you hit a ship it will be marked with an "O".
+- If you miss a ship it will be marked with an "X"
+"""
 from random import randint
 import os
+import sys
 
 
-
-
-
-    
 os.system('clear')
 print("Welcome to the game of Battleships!")
 print("We want you to create a custom Battleship board.")
 print("Normally a Battleship board consists of 10 rows and 10 columns.")
 print("This time, you get to decide the size of the battlefield.")
 print("After every input you type into the game, press enter to continue.")
-board_size = int(input("enter board size: "))
+while True:
+    board_size = input("Enter board size: ")
+    if board_size.isdigit():
+        board_size = int(board_size)
+        if board_size > 1 and board_size <= 10:
+            print(" ")
+            print("Perfect, let's sail out and find the enemies Commander!")
+            print("-------------------------------------------------------")
+            break
+        else:
+            print("Sorry, The number needs to be between 1 and 10")
+    else:
+        print("Sorry, no numbers below 1 or higher than 10")
+        continue
 
 
 def get_board_size():
-        
-    global y
-    global board
-
-    if y > 1 and y <= 10:
-        print("perfect")
-    if y < 1 or y > 10:
-        raise Exception("Sorry, no numbers below 1 or higher than 10")
-
-    for x in range(y):
-        board.append(["-"] * y)
-    return y
+    """
+    Y is the global variable for the board size.
+    This function creates the rows.
+    """
+    for x in range(Y):
+        BOARD.append(["-"] * Y)
+    return Y
 
 
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def print_board():
     """
-    creates the board
+    Creates the board and prints it.
     """
-    global board
-    letters = alphabet[0: (y)]
-    print("  %s%s" % (" "," ".join(letters)))
+    global BOARD
+    letters = ALPHABET[0: (Y)]
+    print("  %s%s" % (" ", " ".join(letters)))
     row_number = 1
-    for row in board:
+    for row in BOARD:
         if row_number <= 9:
             print(" %d|%s|" % (row_number, "|".join(row)))
         else:
@@ -53,65 +69,62 @@ def print_board():
 
 
 def making_ships():
-    global y
-    global board
-    global ship_placement
+    """
+    Placing the ships on the board.
+    """
+    global Y
+    global BOARD
+    global SHIP_PLACEMENT
     ships_placed = 0
-    global ships_sunk
-    global total_ships
-    shots = 20
-    if y <= 3:
-        shots = 2
-        total_ships = 1
-        print(f"There is {total_ships} ship in range commander, go shoot it down!")
-        while ships_placed != total_ships:
-            ship_row = randint(1, (y))
-            ship_col = randint(1, (y))
+    global SHIPS_SUNK 
+    global TOTAL_SHIPS
+    if Y <= 3:
+        TOTAL_SHIPS = 1
+        while ships_placed != TOTAL_SHIPS:
+            ship_row = randint(1, (Y))
+            ship_col = randint(1, (Y))
             ship_location = [ship_row, ship_col]
-            ship_placement.append(ship_location)
+            SHIP_PLACEMENT.append(ship_location)
             ships_placed += 1
-    elif y < 6 and y > 3 :
-        total_ships = 3
-        shots = 10
-        print(f"There are {total_ships} ships in range commander, go shoot them down!")
-        while ships_placed != total_ships:
-            ship_row = randint(1, (y))
-            ship_col = randint(1, (y))
+    elif Y < 6 and Y > 3:
+        TOTAL_SHIPS = 3
+        # print(f"There are {total_ships} ships in range Commander.")
+        # print("Go shoot them down!")
+        while ships_placed != TOTAL_SHIPS:
+            ship_row = randint(1, (Y))
+            ship_col = randint(1, (Y))
             ship_location = [ship_row, ship_col]
-            ship_placement.append(ship_location)
+            SHIP_PLACEMENT.append(ship_location)
             ships_placed += 1
     else:
-        shots = 20
-        total_ships = 10
-        print(f"There are {total_ships} ships in range commander, go shoot them down!")
-        while ships_placed != total_ships:
-            ship_row = randint(1, (y))
-            ship_col = randint(1, (y))
+        TOTAL_SHIPS = 10
+        # print(f"There are {total_ships} ships in range Commander.")
+        # print("Go shoot them down!")
+        while ships_placed != TOTAL_SHIPS:
+            ship_row = randint(1, (Y))
+            ship_col = randint(1, (Y))
             ship_location = [ship_row, ship_col]
-            ship_placement.append(ship_location)
+            SHIP_PLACEMENT.append(ship_location)
             ships_placed += 1
-    print(ship_placement)
-   
-        
+    # print(ship_placement) 
+    # un-comment this if you want to see where the ships are placed.
+
+
 def making_guesses():
-    global ship_placement
-    global ships_sunk
+    global SHIP_PLACEMENT
+    global SHIPS_SUNK
     global board_size
-    global total_ships
-    
-    for turn in range((y*y) // 3):  
-            # I want this to be in a second function, 
-            # but Im stuck at how I can do that because of the variables 
-            # I am using I have tried passing them through return___ and having them in paranthesis behind the def function(__)
-        shots = (y*y) // 3
-        print(f"Commander, we have {shots - turn} shots left.")
-        print(f"Our scouting report says there are this many ships left: {total_ships - ships_sunk} ")
-                
-                
+    global TOTAL_SHIPS 
+    for turn in range((Y*Y) // 3):
+        shots = (Y*Y) // 3
+        print(" ")
+        print(f'Lieutenant: "Commander, we have {shots - turn} shots left."')
+        print('Commander: "And How many ships are left Lieutenant?"')
+        print(f'Lieutenant: "{TOTAL_SHIPS - SHIPS_SUNK} left Commander.\
+            Go get them!"')
         guess_row = None
         while True:
             guess_row = input("Enter a row number: ")
-
             if guess_row.isdigit():
                 guess_row = int(guess_row)
                 break
@@ -126,60 +139,75 @@ def making_guesses():
             if guess_col.isalpha() and len(guess_col) == 1:
                 guess_col = guess_col.lower()
                 guess_col = ord(guess_col) - 96
-                print(guess_col)
+                # print(guess_col)
                 break
-
-                #if guess_col in range(1, board_size):
-                #    print("that works")
-                #    print(guess_col)
-                    #break
-                #guess_col = ord(guess_col) -96
-                #    print("that works")
-                #    print(guess_col)
-                #else:
-                #    print("Please enter a letter thats visible on the board")
-                #    continue
             else:
-                print("Commander, the available letters are on the board!")
+                print("Commander, the available letters are on the board....")
                 continue
 
-        print(f"Shots {shots}")
-        guess = [guess_row, guess_col]
-        if guess in ship_placement:
+        # print(f"Shots {shots}")
+        g_row = guess_row
+        g_col = guess_col
+        guess = [g_row, g_col]
+        if guess in SHIP_PLACEMENT:
+            print("-------------------------------------------------------")
             print("Commander! You sunk a battleship!")
-            board[guess_row - 1][guess_col - 1] = "O"
-            ships_sunk += 1
+            print("-------------------------------------------------------")
+            print(" ")
+            BOARD[g_row - 1][g_col - 1] = "O"
+            SHIPS_SUNK += 1
         elif (turn + 1) - shots == 0:
-            print("Game Over, lets go back to the docks and restock ammunition")
-            #break
-        elif (guess_row < 1 or guess_row > y) or (guess_col < 1 or guess_col > y):
+            print("-------------------------------------------------------")
+            print("Game Over..")
+            print("lets go back to the docks and restock ammunition")
+            print("-------------------------------------------------------")
+            print(" ")
+        elif (g_row < 1 or g_row > Y) or (g_col < 1 or g_col > Y):
+            print("-------------------------------------------------------")
             print("Commander, your coordinates are out of range!")
             print("Stop wasting our shots!")
-            print(f"Try shooting within rows 1-{y} and columns A-{alphabet[y - 1]}")
-        elif (board[guess_row - 1][guess_col - 1]) == "X" or (board[guess_row - 1][guess_col - 1]) == "O":
+            print(f"Try shooting within rows: 1-{Y}")
+            print(f"And columns: A-{ALPHABET[Y - 1]}")
+            print("-------------------------------------------------------")
+            print(" ")
+        elif (BOARD[g_row - 1][g_col - 1]) == "X":
+            print("-------------------------------------------------------")
             print("Commander...You guessed that one already...")
+            print("-------------------------------------------------------")
+            print(" ")
+        elif (BOARD[g_row - 1][g_col - 1]) == "O":
+            print("-------------------------------------------------------")
+            print("Commander...You guessed that one already...")
+            print("-------------------------------------------------------")
+            print(" ")
         else:
+            print("-------------------------------------------------------")
             print("Commander, you missed the battleship, let's try again!")
-            board[guess_row - 1][guess_col - 1] = "X"
-        if ships_sunk == total_ships:
+            print("-------------------------------------------------------")
+            print(" ")
+            BOARD[g_row - 1][g_col - 1] = "X"
+        if SHIPS_SUNK == TOTAL_SHIPS:
             print_board()
+            print("-------------------------------------------------------")
             print("Congratulations Commander, you have sunk all the ships!")
             print("Victory is ours, set sails, and let's go home!")
+            print("-------------------------------------------------------")
+            print(" ")
             break 
         turn += 1
                 
         print_board()
 
     
-
-
 def run_game():
     """
     This runs the entire game in order
     """
-    global y
+    global Y
     get_board_size()
-    print("Let's play Battleship!")
+    print("               Let's play Battleships!")
+    print("-------------------------------------------------------")
+    print(" ")
     print_board()
     making_ships()
     making_guesses()
@@ -202,9 +230,6 @@ def restart_game():
             print("sys.executable was", sys.executable)
             print("restart now")
             print("------------------------------------")
-            
-
-            
             os.execv(sys.executable, ['python'] + sys.argv)
             
         else: 
@@ -213,14 +238,14 @@ def restart_game():
 
 
 # These are global variables used throughout the code
-y = board_size
-board = []
-ship_placement = []
-total_ships = 10
-print(total_ships)
-ships_sunk = 0
+Y = board_size
+BOARD = []
+SHIP_PLACEMENT = []
+TOTAL_SHIPS = 10
+# print(total_ships)
+SHIPS_SUNK = 0
 
 run_game()
 restart_game()
 
-y = board_size
+Y = board_size
