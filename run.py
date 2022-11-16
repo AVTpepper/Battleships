@@ -18,16 +18,18 @@ import sys
 
 
 os.system('clear')
-print("Welcome to the game of Battleships!")
-print("We want you to create a custom Battleship board.")
-print("Normally a Battleship board consists of 10 rows and 10 columns.")
-print("This time, you get to decide the size of the battlefield.")
-print("After every input you type into the game, press enter to continue.")
+print("               Welcome to the game of Battleships!")
+print("--------------------------------------------------------------------")
+print("         We want you to create a custom Battleship board.")
+print("   Normally a Battleship board consists of 10 rows and 10 columns.")
+print("      This time, you get to decide the size of the battlefield.")
+print("  After every input you type into the game, press enter to continue.")
+print("--------------------------------------------------------------------")
 while True:
-    board_size = input("Enter board size: ")
-    if board_size.isdigit():
-        board_size = int(board_size)
-        if board_size > 1 and board_size <= 10:
+    BOARD_SIZE = input("Enter board size: ")
+    if BOARD_SIZE.isdigit():
+        BOARD_SIZE = int(BOARD_SIZE)
+        if BOARD_SIZE > 1 and BOARD_SIZE <= 10:
             print(" ")
             print("Perfect, let's sail out and find the enemies Commander!")
             print("-------------------------------------------------------")
@@ -56,7 +58,7 @@ def print_board():
     """
     Creates the board and prints it.
     """
-    global BOARD
+    # global BOARD
     letters = ALPHABET[0: (Y)]
     print("  %s%s" % (" ", " ".join(letters)))
     row_number = 1
@@ -72,11 +74,11 @@ def making_ships():
     """
     Placing the ships on the board.
     """
-    global Y
-    global BOARD
-    global SHIP_PLACEMENT
+    # global Y
+    # global BOARD
+    # global SHIP_PLACEMENT
     ships_placed = 0
-    global SHIPS_SUNK 
+    # global SHIPS_SUNK
     global TOTAL_SHIPS
     if Y <= 3:
         TOTAL_SHIPS = 1
@@ -86,7 +88,7 @@ def making_ships():
             ship_location = [ship_row, ship_col]
             SHIP_PLACEMENT.append(ship_location)
             ships_placed += 1
-    elif Y < 6 and Y > 3:
+    elif Y < 8 and Y > 3:
         TOTAL_SHIPS = 3
         # print(f"There are {total_ships} ships in range Commander.")
         # print("Go shoot them down!")
@@ -106,22 +108,38 @@ def making_ships():
             ship_location = [ship_row, ship_col]
             SHIP_PLACEMENT.append(ship_location)
             ships_placed += 1
-    # print(ship_placement) 
+    # print(ship_placement)
     # un-comment this if you want to see where the ships are placed.
 
 
 def making_guesses():
-    global SHIP_PLACEMENT
+    """
+    This function will take input from the user.
+    Check the input against the placement of this ships.
+    Record the guess and give output through the terminal.
+    Changes the board according to hit or miss.
+    """
+    # global SHIP_PLACEMENT
     global SHIPS_SUNK
-    global board_size
-    global TOTAL_SHIPS 
-    for turn in range((Y*Y) // 3):
-        shots = (Y*Y) // 3
+    # global BOARD_SIZE
+    # global TOTAL_SHIPS
+    for turn in range((Y*Y) // 2):
+        shots = int((Y*Y) // 2)
         print(" ")
         print(f'Lieutenant: "Commander, we have {shots - turn} shots left."')
         print('Commander: "And How many ships are left Lieutenant?"')
-        print(f'Lieutenant: "{TOTAL_SHIPS - SHIPS_SUNK} left Commander.\
-            Go get them!"')
+        print(f'Lieutenant: "{TOTAL_SHIPS - SHIPS_SUNK} left Commander."')
+        guess_col = None
+        while True:
+            guess_col = input("Enter column letter: ")
+
+            if guess_col.isalpha() and len(guess_col) == 1:
+                guess_col = guess_col.lower()
+                guess_col = ord(guess_col) - 96
+                break
+            else:
+                print("Commander, the available letters are on the board....")
+                continue
         guess_row = None
         while True:
             guess_row = input("Enter a row number: ")
@@ -131,20 +149,6 @@ def making_guesses():
             else:
                 print("Commander, what you have entered is not in range...")
                 continue
-
-        guess_col = None
-        while True:
-            guess_col = input("Enter column letter: ")
-
-            if guess_col.isalpha() and len(guess_col) == 1:
-                guess_col = guess_col.lower()
-                guess_col = ord(guess_col) - 96
-                # print(guess_col)
-                break
-            else:
-                print("Commander, the available letters are on the board....")
-                continue
-
         # print(f"Shots {shots}")
         g_row = guess_row
         g_col = guess_col
@@ -159,7 +163,7 @@ def making_guesses():
         elif (turn + 1) - shots == 0:
             print("-------------------------------------------------------")
             print("Game Over..")
-            print("lets go back to the docks and restock ammunition")
+            print("Lets go back to the docks and restock ammunition")
             print("-------------------------------------------------------")
             print(" ")
         elif (g_row < 1 or g_row > Y) or (g_col < 1 or g_col > Y):
@@ -193,17 +197,16 @@ def making_guesses():
             print("Victory is ours, set sails, and let's go home!")
             print("-------------------------------------------------------")
             print(" ")
-            break 
-        turn += 1
-                
+            break
         print_board()
+    turn += 1
 
-    
+
 def run_game():
     """
     This runs the entire game in order
     """
-    global Y
+    # global Y
     get_board_size()
     print("               Let's play Battleships!")
     print("-------------------------------------------------------")
@@ -217,7 +220,6 @@ def restart_game():
     """
     This function allows us to restart the game or quit the terminal.
     """
-    print("hello!")
     play = input("Type yes to play again and no to quit: ").lower()
     while True:
         if play == "no":
@@ -231,21 +233,19 @@ def restart_game():
             print("restart now")
             print("------------------------------------")
             os.execv(sys.executable, ['python'] + sys.argv)
-            
-        else: 
+        else:
             print("please type either yes or no")
             restart_game()
 
 
 # These are global variables used throughout the code
-Y = board_size
+Y = BOARD_SIZE
 BOARD = []
 SHIP_PLACEMENT = []
 TOTAL_SHIPS = 10
-# print(total_ships)
 SHIPS_SUNK = 0
 
 run_game()
 restart_game()
 
-Y = board_size
+Y = BOARD_SIZE
