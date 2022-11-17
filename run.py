@@ -35,9 +35,9 @@ while True:
             print("-------------------------------------------------------")
             break
         else:
-            print("Sorry, The number needs to be between 1 and 10")
+            print("Sorry, the number needs to be between 1 and 10")
     else:
-        print("Sorry, no numbers below 1 or higher than 10")
+        print("Sorry, no letters and no numbers below 1 or higher than 10")
         continue
 
 
@@ -125,6 +125,7 @@ def making_guesses():
                 guess_col = ord(guess_col) - 96
                 break
             else:
+                print_board()
                 print("Commander, the available letters are on the board....")
                 continue
         guess_row = None
@@ -134,6 +135,7 @@ def making_guesses():
                 guess_row = int(guess_row)
                 break
             else:
+                print_board()
                 print("Commander, what you have entered is not in range...")
                 continue
         g_row = guess_row
@@ -231,5 +233,3 @@ SHIPS_SUNK = 0
 
 run_game()
 restart_game()
-
-Y = BOARD_SIZE
