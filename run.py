@@ -26,7 +26,7 @@ print("      This time, you get to decide the size of the battlefield.")
 print("  After every input you type into the game, press enter to continue.")
 print("--------------------------------------------------------------------")
 while True:
-    BOARD_SIZE = input("Enter board size: ")
+    BOARD_SIZE = input(" Enter board size: ")
     if BOARD_SIZE.isdigit():
         BOARD_SIZE = int(BOARD_SIZE)
         if BOARD_SIZE > 1 and BOARD_SIZE <= 10:
@@ -35,9 +35,9 @@ while True:
             print("-------------------------------------------------------")
             break
         else:
-            print("Sorry, the number needs to be between 1 and 10")
+            print("   Sorry, the number needs to be between 1 and 10")
     else:
-        print("Sorry, no letters and no numbers below 1 or higher than 10")
+        print("   Sorry, no letters and no numbers below 1 or higher than 10")
         continue
 
 
@@ -59,13 +59,13 @@ def print_board():
     Creates the board and prints it.
     """
     letters = ALPHABET[0: (Y)]
-    print("  %s%s" % (" ", " ".join(letters)))
+    print("      %s%s" % (" ", " ".join(letters)))
     row_number = 1
     for row in BOARD:
         if row_number <= 9:
-            print(" %d|%s|" % (row_number, "|".join(row)))
+            print("     %d|%s|" % (row_number, "|".join(row)))
         else:
-            print("%d|%s|" % (row_number, "|".join(row)))
+            print("    %d|%s|" % (row_number, "|".join(row)))
         row_number += 1
 
 
@@ -114,77 +114,70 @@ def making_guesses():
     for turn in range((Y*Y) // 2):
         shots = int((Y*Y) // 2)
         print(" ")
-        print(f'Lieutenant: "Commander, we have {shots - turn} shots left."')
-        print('Commander: "And How many ships are left Lieutenant?"')
-        print(f'Lieutenant: "{TOTAL_SHIPS - SHIPS_SUNK} left Commander."')
+        print(f'  Lieutenant: "Commander, we have {shots - turn} shots left."')
+        print('  Commander: "And How many ships are left Lieutenant?"')
+        print(f'  Lieutenant: "{TOTAL_SHIPS - SHIPS_SUNK} left Commander."')
         guess_col = None
         while True:
-            guess_col = input("Enter column letter: ")
+            guess_col = input("  Enter column letter: ")
             if guess_col.isalpha() and len(guess_col) == 1:
                 guess_col = guess_col.lower()
                 guess_col = ord(guess_col) - 96
                 break
             else:
                 print_board()
-                print("Commander, the available letters are on the board....")
+                print(" Commander, the available letters are on the board....")
                 continue
         guess_row = None
         while True:
-            guess_row = input("Enter a row number: ")
+            guess_row = input("  Enter a row number: ")
             if guess_row.isdigit():
                 guess_row = int(guess_row)
                 break
             else:
                 print_board()
-                print("Commander, what you have entered is not in range...")
+                print("  Commander, what you have entered is not in range...")
                 continue
         g_row = guess_row
         g_col = guess_col
         guess = [g_row, g_col]
         if guess in SHIP_PLACEMENT:
             print("-------------------------------------------------------")
-            print("Commander! You sunk a battleship!")
+            print("          Commander! You sunk a battleship!")
             print("-------------------------------------------------------")
-            print(" ")
             BOARD[g_row - 1][g_col - 1] = "O"
             SHIPS_SUNK += 1
         elif (turn + 1) - shots == 0:
             print("-------------------------------------------------------")
-            print("Game Over..")
-            print("Lets go back to the docks and restock ammunition")
+            print("                   Game Over..")
+            print("   Lets go back to the docks and restock ammunition")
             print("-------------------------------------------------------")
-            print(" ")
         elif (g_row < 1 or g_row > Y) or (g_col < 1 or g_col > Y):
             print("-------------------------------------------------------")
-            print("Commander, your coordinates are out of range!")
-            print("Stop wasting our shots!")
-            print(f"Try shooting within rows: 1-{Y}")
-            print(f"And columns: A-{ALPHABET[Y - 1]}")
+            print("     Commander, your coordinates are out of range!")
+            print("              Stop wasting our shots!")
+            print(f"          Try shooting within rows: 1-{Y}")
+            print(f"          And columns: A-{ALPHABET[Y - 1]}")
             print("-------------------------------------------------------")
-            print(" ")
         elif (BOARD[g_row - 1][g_col - 1]) == "X":
             print("-------------------------------------------------------")
-            print("Commander...You guessed that one already...")
+            print("      Commander...You guessed that one already...")
             print("-------------------------------------------------------")
-            print(" ")
         elif (BOARD[g_row - 1][g_col - 1]) == "O":
             print("-------------------------------------------------------")
-            print("Commander...You guessed that one already...")
+            print("      Commander...You guessed that one already...")
             print("-------------------------------------------------------")
-            print(" ")
         else:
             print("-------------------------------------------------------")
-            print("Commander, you missed the battleship, let's try again!")
+            print(" Commander, you missed the battleship, let's try again!")
             print("-------------------------------------------------------")
-            print(" ")
             BOARD[g_row - 1][g_col - 1] = "X"
         if SHIPS_SUNK == TOTAL_SHIPS:
             print_board()
             print("-------------------------------------------------------")
             print("Congratulations Commander, you have sunk all the ships!")
-            print("Victory is ours, set sails, and let's go home!")
+            print("   Victory is ours, set sails, and let's go home!")
             print("-------------------------------------------------------")
-            print(" ")
             break
         print_board()
     turn += 1
