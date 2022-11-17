@@ -1,6 +1,8 @@
 # __Portfolio Project 3 - Battleships__
 At the start of the project I was looking forward to not having to worry too much about the style and what the finished end product would look like. I didnt know I could be that wrong. I enjoyed spending quite a bit of time putting in finishing touches trying to make the game look better, but also give a better experience to the user. I am happy with the end product and I hope plenty of people can have fun playing it!
 
+![Am I responsive Battleship Website](assets/images/am_i_responsive_battleships.png)
+
 ---
 
 ## __Planning Phase__
